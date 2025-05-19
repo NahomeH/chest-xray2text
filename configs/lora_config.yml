@@ -1,0 +1,22 @@
+# LoRA configuration for BLIP-2 fine-tuning
+# -------------------------------------------------
+
+# Bottleneck dimension (rank)
+r: 8
+
+# Scaling factor; effective weight = alpha / r
+alpha: 32
+
+# Dropout applied inside LoRA adapters during training
+lora_dropout: 0.05
+
+# Which layers to inject adapters into.
+# Wildcards (*) are supported by PEFT.
+target_modules:
+  - "q_proj"
+  - "v_proj"
+  - "k_proj"
+  - "out_proj"
+
+# Optionally freeze everything except the adapters
+freeze_base_model: true

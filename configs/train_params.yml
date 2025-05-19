@@ -1,0 +1,34 @@
+# Training hyper-parameters for BLIP-2 fine-tuning
+# ------------------------------------------------
+
+# Dataset paths
+train_csv: "data/processed/train_meta.csv"
+val_csv:   "data/processed/val_meta.csv"
+image_root: "data/processed/images"
+
+# Checkpoint / output
+output_dir: "models/blip2_lora"
+save_every: 1        # save checkpoint every N epochs
+log_every:  100      # print loss every N steps
+
+# Optimization
+epochs: 3
+train_batch_size: 8          # per-GPU
+eval_batch_size: 8
+learning_rate: 5.0e-5
+weight_decay: 0.01
+warmup_steps: 100
+gradient_accumulation_steps: 2
+max_grad_norm: 1.0
+
+# Generation settings for on-the-fly validation BLEU/ROUGE
+gen_max_len: 128
+gen_num_beams: 4
+
+# Hardware
+fp16: true                 # mixed precision
+device: "cuda"             # or "cpu"
+
+# Resume / initialization
+pretrained_model: "Salesforce/blip2-flan-t5-xl"
+resume_from: null          # path to checkpoint.pt if resuming
